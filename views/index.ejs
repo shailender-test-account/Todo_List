@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box" id="heading">
+        <h1>
+            <%=listTitle %>
+        </h1>
+    </div>
+    <div class="container">
+
+        <% for(let item of listItems ) { %>
+            <div id="items">
+                <form action="/delete" method="post"   >
+                    <input type="checkbox" name="deletedItemId" value="<%= item.id %>" >
+                </form>
+                <p id="title" <%=item.id %>>
+                    <%=item.title %>
+
+                </p>
+
+                <form class="edit" action="/edit" method="post">
+                    <input type="hidden" name="updateItemId" value="<%= item.id %>">
+                    <input id="input<%= item.id %>" type="text" value="updateItemTitle" hidden="true" autocomplete="off"
+                        autofocus="true">
+                    <button id="done<%= item.id %>" class="update" type="submit" hidden>SAVE</button>
+                </form>
+                <button id="edit<%= item.id %>" class="edit" onclick="handler('<%= item.id%>')"><img
+                        class="pencil image" src="/views/pencil solid.svg" alt="pencil image"></button>
+
+                <form action="/add" method="post"  >
+                    <input type="text" name="newItem" placeholder="New Item" autofocus="true" autocomplete="off">
+                    <button id="add" value="listTitle" name="list">+</button>
+                </form>
+            </div>
+
+            <% } %>
+    </div>
+</body>
+
+</html>
